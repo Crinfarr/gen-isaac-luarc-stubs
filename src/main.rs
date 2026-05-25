@@ -7,7 +7,7 @@ use std::{
     process::Stdio,
 };
 
-use tracing::{debug, error, info, warn};
+use tracing::{error, info, warn};
 use tracing_subscriber::util::SubscriberInitExt;
 use typed_json::json;
 
