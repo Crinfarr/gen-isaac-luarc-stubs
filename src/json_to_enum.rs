@@ -29,7 +29,7 @@ pub fn decode_enum_file(filepath: &Path) -> Result<EnumFile> {
 pub fn to_lua(decoded_file: &EnumFile) -> Result<String> {
     let mut fstring = String::default();
     for (enum_name, enum_data) in decoded_file.iter() {
-        fstring += &format!("--@enum {enum_name}\n{enum_name} = {{\n");
+        fstring += &format!("---@enum {enum_name}\n{enum_name} = {{\n");
         for (variant_name, tval) in enum_data {
             match tval {
                 TEnumVal::TString(enum_val) => {
@@ -43,7 +43,7 @@ pub fn to_lua(decoded_file: &EnumFile) -> Result<String> {
                     fstring += &format!("\t--{comment}\n\t{variant_name} = {value},\n")
                 }
                 TEnumVal::TMap(m) => {
-                    fstring += &format!("\t--@enum {variant_name}\n\t{variant_name} = {{\n");
+                    fstring += &format!("\t---@enum {variant_name}\n\t{variant_name} = {{\n");
                     for (subname, subval) in m {
                         match subval {
                             TEnumVal::TInt(subval) => {
